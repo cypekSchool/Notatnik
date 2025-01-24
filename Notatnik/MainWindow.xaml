@@ -8,13 +8,23 @@
         Title="Notatnik" Height="450" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Plik">
+            <MenuItem Header="P_lik">
+                <MenuItem Header="Nowy"
+                          Click="MenuItem_Click_New"/>
+                <MenuItem Header="Otwórz"/>
+                <MenuItem Header="Zapisz"/>
+                <MenuItem Header="Zapisz jako"/>
+                <Separator/>
+                <MenuItem Header="Zamknij"/>
             </MenuItem>
-            <MenuItem Header="Edycja">
-                
+            <MenuItem Header="Ed_ycja">
+                <MenuItem Header="Kopiuj" Command="ApplicationCommands.Copy"/>
+                <MenuItem Header="Wytnij" Command="ApplicationCommands.Cut"/>
+                <MenuItem Header="Wklej" Command="ApplicationCommands.Paste"/>
+                <MenuItem Header="Cofnij" Command="ApplicationCommands.Undo"/>
             </MenuItem>
             <MenuItem Header="Format">
-                
+
             </MenuItem>
             <MenuItem>
                 <MenuItem.Header>
@@ -26,9 +36,11 @@
                         <Label Content="Informacje"/>
                     </StackPanel>
                 </MenuItem.Header>
+                <MenuItem Header="o autorze" Click="MenuItem_Click_Author"/>
+                <MenuItem Header="o aplikacji" Click="MenuItem_Click_App"/>
             </MenuItem>
         </Menu>
-        <TextBox x:Name="TextBox"
+        <TextBox x:Name="notepadTextBox"
                  TextWrapping="Wrap"
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Auto"

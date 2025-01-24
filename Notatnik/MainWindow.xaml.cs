@@ -20,5 +20,22 @@ namespace Notatnik
         {
             InitializeComponent();
         }
+
+        private void MenuItem_Click_New(object sender, RoutedEventArgs e)
+        {
+            notepadTextBox.Text = string.Empty;
+        }
+
+        private void MenuItem_Click_Author(object sender, RoutedEventArgs e)
+        {
+            WindowAuthor windowAuthor = new();
+            windowAuthor.Show();
+        }
+
+        private void MenuItem_Click_App(object sender, RoutedEventArgs e)
+        {
+            WindowApp windowApp = new();
+            windowApp.Show();
+        }
     }
 }
