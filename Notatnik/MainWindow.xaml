@@ -9,33 +9,23 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="P_lik">
-                <MenuItem Header="Nowy"
-                          Click="MenuItem_Click_New"/>
-                <MenuItem Header="Otwórz"/>
-                <MenuItem Header="Zapisz"/>
-                <MenuItem Header="Zapisz jako"/>
+                <MenuItem Header="Nowy" Click="MenuItem_Click_New"/>
+                <MenuItem Header="Otwórz" Click="MenuItem_Click_OpenFile"/>
+                <MenuItem Header="Zapisz" Click="MenuItem_Click_Save"/>
+                <MenuItem Header="Zapisz jako" Click="MenuItem_Click_SaveAs"/>
                 <Separator/>
-                <MenuItem Header="Zamknij"/>
+                <MenuItem Header="Zamknij" Click="MenuItem_Click_Close"/>
             </MenuItem>
-            <MenuItem Header="Ed_ycja">
+           <MenuItem Header="Ed_ycja">
                 <MenuItem Header="Kopiuj" Command="ApplicationCommands.Copy"/>
                 <MenuItem Header="Wytnij" Command="ApplicationCommands.Cut"/>
                 <MenuItem Header="Wklej" Command="ApplicationCommands.Paste"/>
                 <MenuItem Header="Cofnij" Command="ApplicationCommands.Undo"/>
             </MenuItem>
             <MenuItem Header="Format">
-
+                <MenuItem IsCheckable="True" IsChecked="True" />
             </MenuItem>
-            <MenuItem>
-                <MenuItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <Ellipse
-                            Width="10"
-                            Height="5"
-                            Fill="Black"/>
-                        <Label Content="Informacje"/>
-                    </StackPanel>
-                </MenuItem.Header>
+            <MenuItem Header="Informacje">
                 <MenuItem Header="o autorze" Click="MenuItem_Click_Author"/>
                 <MenuItem Header="o aplikacji" Click="MenuItem_Click_App"/>
             </MenuItem>
@@ -44,6 +34,7 @@
                  TextWrapping="Wrap"
                  AcceptsReturn="True"
                  VerticalScrollBarVisibility="Auto"
-                 FontSize="18"/>
+                 FontSize="18"
+                 TextChanged="notepadTextBox_TextChanged"/>
     </DockPanel>
 </Window>
