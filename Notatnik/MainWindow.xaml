@@ -23,7 +23,12 @@
                 <MenuItem Header="Cofnij" Command="ApplicationCommands.Undo"/>
             </MenuItem>
             <MenuItem Header="Format">
-                <MenuItem IsCheckable="True" IsChecked="True" />
+                <MenuItem Header="Dzień/Noc" 
+                          IsCheckable="True" 
+                          IsChecked="True"
+                          Checked="Lightmode_Checked"
+                          Unchecked="Lightmode_Unchecked"/>
+                <MenuItem Header="Własny kolor" Click="MenuItem_Click_UserColor"/>
             </MenuItem>
             <MenuItem Header="Informacje">
                 <MenuItem Header="o autorze" Click="MenuItem_Click_Author"/>

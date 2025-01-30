@@ -19,8 +19,16 @@ namespace Notatnik
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string FileName { get; set; } = "";
-        public bool isSaved = false;
+        private bool hasBeenSaved = false;
+        public string FileName { get; set; } = "Bez Nazwy";
+        public bool isSaved
+        {
+            get; set
+            {
+                Title = (value ? "" : '*') + FileName + " - Notatnik";
+                if (value) hasBeenSaved = true;
+            }
+        } = false;
 
         public MainWindow()
         {
@@ -32,6 +40,7 @@ namespace Notatnik
             WantSaveChanges();
             FileName = "";
             notepadTextBox.Text = string.Empty;
+            hasBeenSaved = false;
         }
 
         private void MenuItem_Click_Author(object sender, RoutedEventArgs e)
@@ -49,13 +58,14 @@ namespace Notatnik
 
         private void MenuItem_Click_Save(object sender, RoutedEventArgs e)
         {
-            if (FileName == "")
+            if (!hasBeenSaved)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "pliki tekstowe | *.txt";
                 if (saveFileDialog.ShowDialog() == true)
                 {
-                    File.WriteAllText(saveFileDialog.FileName, notepadTextBox.Text);
+                    FileName = saveFileDialog.FileName;
+                    File.WriteAllText(FileName, notepadTextBox.Text);
                     isSaved = true;
                 }
             }
@@ -72,7 +82,8 @@ namespace Notatnik
             saveFileDialog.Filter = "pliki tekstowe | *.txt";
             if (saveFileDialog.ShowDialog() == true)
             {
-                File.WriteAllText(saveFileDialog.FileName, notepadTextBox.Text);
+                FileName = saveFileDialog.FileName;
+                File.WriteAllText(FileName, notepadTextBox.Text);
                 isSaved = true;
             }
         }
@@ -90,7 +101,7 @@ namespace Notatnik
         {
             WantSaveChanges();
             Close();
-            Process.Start("shutdown", "/s /t 0");
+            //Process.Start("shutdown", "/s /t 0");
         }
 
         private void WantSaveChanges()
@@ -113,9 +124,39 @@ namespace Notatnik
             }
         }
 
+
+
         private void notepadTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             isSaved = false;
+        }
+
+        private void Lightmode_Checked(object sender, RoutedEventArgs e)
+        {
+            if (notepadTextBox != null)
+            {
+                notepadTextBox.Background = Brushes.White;
+                notepadTextBox.Foreground = Brushes.Black;
+            }
+        }
+        
+        private void Lightmode_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (notepadTextBox != null)
+            {
+                notepadTextBox.Background = Brushes.Black;
+                notepadTextBox.Foreground = Brushes.White;
+            }
+        }
+
+        private void MenuItem_Click_UserColor(object sender, RoutedEventArgs e)
+        {
+            WindowUserColor windowUserColor = new WindowUserColor();
+            windowUserColor.ShowDialog();
+            Color color = Color.FromRgb(windowUserColor.R, 
+                                        windowUserColor.G, 
+                                        windowUserColor.B);
+            notepadTextBox.Background = new SolidColorBrush(color);
         }
     }
 }
